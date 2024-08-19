@@ -3,6 +3,7 @@ package com.sree.expense.service.impl;
 import com.sree.expense.dto.ExpenseDto;
 import com.sree.expense.entity.Category;
 import com.sree.expense.entity.Expense;
+import com.sree.expense.exception.ResourceNotFoundException;
 import com.sree.expense.mapper.CategoryMapper;
 import com.sree.expense.mapper.ExpenseMapper;
 import com.sree.expense.repository.CategoryRepository;
@@ -36,7 +37,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     public ExpenseDto getExpenseById(Long id) {
         Expense expense = expenseRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Expense not found"));
         return ExpenseMapper.mapToExpenseDto(expense);
     }
 
@@ -59,7 +60,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         if(expenseDto.categoryDto() != null){
             Category category = categoryRepository
                     .findById(expenseDto.categoryDto().id())
-                    .orElseThrow(() -> new RuntimeException("Category not found"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
             expense.setCategory(category);
         }
@@ -73,7 +74,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     public void deleteExpense(Long id) {
         Expense expense = expenseRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Expense not found"));
 
         expenseRepository.delete(expense);
     }

@@ -2,6 +2,7 @@ package com.sree.expense.service.impl;
 
 import com.sree.expense.dto.CategoryDto;
 import com.sree.expense.entity.Category;
+import com.sree.expense.exception.ResourceNotFoundException;
 import com.sree.expense.mapper.CategoryMapper;
 import com.sree.expense.repository.CategoryRepository;
 import com.sree.expense.service.CategoryService;
@@ -30,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         return CategoryMapper.mapToCategoryDto(category);
     }
@@ -46,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto updateCategory(Long id, CategoryDto categoryDto) {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         category.setName(categoryDto.name());
         return CategoryMapper.mapToCategoryDto(categoryRepository.save(category));
@@ -56,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(Long id) {
         Category category = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         categoryRepository.delete(category);
     }
