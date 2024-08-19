@@ -15,3 +15,14 @@ facilitating better budget management and financial planning.
 3. Get All Categories: Users can retrieve a lists all available categories.
 4. Update Category: Users can update the existing category.
 5. Delete Category: Users can delete the existing category. 
+
+Expense Management feature allows Users to add new expenses, modify details of
+existing expenses, view information about a particular expense or all expenses, and
+remove expenses from the record. This feature is crucial for tracking daily expenses
+and monitoring financial outflows.
+
+1. Create Expense: Users can add new expense under a specific category.
+2. Get Expense: Users can retrieve details of a specific expense.
+3. Get All Expenses: Users can retrieve a lists all available expenses.
+4. Update Expense: Users can update the existing expense.
+5. Delete Category: Users can delete the existing expense.
